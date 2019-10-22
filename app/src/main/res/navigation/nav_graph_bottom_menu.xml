@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_bottom_menu"
+    app:startDestination="@id/bottomMenuFragment">
+
+
+    <fragment
+        android:id="@+id/bottomMenuFragment"
+        android:name="com.andor.bottomsheetlockit.BottomMenuFragment"
+        android:label="fragment_bottom_menu"
+        tools:layout="@layout/fragment_bottom_menu" >
+        <action
+            android:id="@+id/action_bottomMenuFragment_to_primaryMenuFragment"
+            app:destination="@id/primaryMenuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/primaryMenuFragment"
+        android:name="com.andor.bottomsheetlockit.PrimaryMenuFragment"
+        android:label="fragment_primary_menu"
+        tools:layout="@layout/fragment_primary_menu" />
+</navigation>
