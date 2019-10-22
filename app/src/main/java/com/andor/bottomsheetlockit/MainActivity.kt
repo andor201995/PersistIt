@@ -15,16 +15,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        bottomSheetBehavior =
+            BottomSheetBehavior.from(findViewById<View>(R.id.bottomSheetNavHostFragment))
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
     }
 
     override fun onStart() {
         super.onStart()
-        bottomSheetBehavior =
-            BottomSheetBehavior.from(findViewById<View>(R.id.bottomSheetNavHostFragment))
         bottomSheetBehavior.setBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
             override fun onSlide(p0: View, p1: Float) {
             }
+
             override fun onStateChanged(p0: View, p1: Int) {
                 when (bottomSheetBehavior.state) {
                     BottomSheetBehavior.STATE_DRAGGING -> bottomSheetBehavior.state =
