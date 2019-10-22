@@ -5,4 +5,5 @@
     <string name="bottomSheet">BottomSheet</string>
     <string name="pop_up">Pop UP</string>
     <string name="click_here">Click here</string>
+    <string name="write_text_here">Write text here</string>
 </resources>
