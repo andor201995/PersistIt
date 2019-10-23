@@ -1,4 +1,4 @@
-package com.andor.bottomsheetlockit
+package com.andor.bottomsheetlockit.core.custom
 
 interface TextEventListener {
     fun onDown()

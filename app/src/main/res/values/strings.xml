@@ -6,4 +6,8 @@
     <string name="pop_up">Pop UP</string>
     <string name="click_here">Click here</string>
     <string name="write_text_here">Write text here</string>
+    <string name="bottom_sheet_menu_options">Bottom Sheet Menu Options:</string>
+    <string name="bottom_sheet_1">BottomSheet: 1</string>
+    <string name="bottom_sheet_2">BottomSheet: 2</string>
+    <string name="bottom_sheet_3">BottomSheet: 3</string>
 </resources>

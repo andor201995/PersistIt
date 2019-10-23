@@ -1,4 +1,4 @@
-package com.andor.bottomsheetlockit
+package com.andor.bottomsheetlockit.core
 
 data class AppState(
     val focusType: TextFocusType = TextFocusType.None,

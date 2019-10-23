@@ -1,4 +1,4 @@
-package com.andor.bottomsheetlockit
+package com.andor.bottomsheetlockit.bottomMenu
 
 
 import android.os.Bundle
@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
+import com.andor.bottomsheetlockit.R
 import kotlinx.android.synthetic.main.fragment_bottom_menu.*
 
 /**

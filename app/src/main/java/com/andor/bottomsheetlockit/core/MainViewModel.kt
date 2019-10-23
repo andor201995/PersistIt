@@ -1,12 +1,18 @@
-package com.andor.bottomsheetlockit
+package com.andor.bottomsheetlockit.core
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.andor.bottomsheetlockit.core.AppState
+import com.andor.bottomsheetlockit.core.BottomMenuState
+import com.andor.bottomsheetlockit.core.EventType
+import com.andor.bottomsheetlockit.core.TextFocusType
 
 class MainViewModel : ViewModel() {
 
-    private val appStateStream: MutableLiveData<AppState> = MutableLiveData(AppState())
+    private val appStateStream: MutableLiveData<AppState> = MutableLiveData(
+        AppState()
+    )
 
     fun getAppStateStream(): LiveData<AppState> {
         return appStateStream

@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/bottomMenuFragment"
-        android:name="com.andor.bottomsheetlockit.BottomMenuFragment"
+        android:name="com.andor.bottomsheetlockit.bottomMenu.BottomMenuFragment"
         android:label="fragment_bottom_menu"
         tools:layout="@layout/fragment_bottom_menu" >
         <action
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/primaryMenuFragment"
-        android:name="com.andor.bottomsheetlockit.PrimaryMenuFragment"
+        android:name="com.andor.bottomsheetlockit.bottomMenu.PrimaryMenuFragment"
         android:label="fragment_primary_menu"
         tools:layout="@layout/fragment_primary_menu" />
 </navigation>

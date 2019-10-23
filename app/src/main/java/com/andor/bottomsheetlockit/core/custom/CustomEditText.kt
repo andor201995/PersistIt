@@ -1,4 +1,4 @@
-package com.andor.bottomsheetlockit
+package com.andor.bottomsheetlockit.core.custom
 
 import android.content.Context
 import android.util.AttributeSet
