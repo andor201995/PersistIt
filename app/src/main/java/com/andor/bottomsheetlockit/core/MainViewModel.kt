@@ -3,10 +3,6 @@ package com.andor.bottomsheetlockit.core
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.andor.bottomsheetlockit.core.AppState
-import com.andor.bottomsheetlockit.core.BottomMenuState
-import com.andor.bottomsheetlockit.core.EventType
-import com.andor.bottomsheetlockit.core.TextFocusType
 
 class MainViewModel : ViewModel() {
 
@@ -20,7 +16,7 @@ class MainViewModel : ViewModel() {
 
     fun onTextFocusChanged(textFocusType: TextFocusType) {
         if (textFocusType == TextFocusType.Focused && textFocusType != appStateStream.value!!.focusType
-            && appStateStream.value!!.bottomMenuState == BottomMenuState.Visible
+            && appStateStream.value!!.bottomMenuState is BottomMenuState.Visible
         ) {
             hideBottomSheet()
         }
@@ -32,8 +28,8 @@ class MainViewModel : ViewModel() {
             appStateStream.value?.copy(bottomMenuState = BottomMenuState.Invisible)
     }
 
-    fun showBottomSheet() {
-        appStateStream.value = appStateStream.value?.copy(bottomMenuState = BottomMenuState.Visible)
+    fun showBottomSheet(bottomMenuState: BottomMenuState.Visible) {
+        appStateStream.value = appStateStream.value?.copy(bottomMenuState = bottomMenuState)
     }
 
     fun handleEvent(event: EventType) {

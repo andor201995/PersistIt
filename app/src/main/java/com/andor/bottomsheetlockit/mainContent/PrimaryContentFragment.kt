@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.andor.bottomsheetlockit.R
+import com.andor.bottomsheetlockit.core.BottomMenuState
 import com.andor.bottomsheetlockit.core.MainViewModel
 import kotlinx.android.synthetic.main.fragment_primary_content.*
 
@@ -30,7 +31,13 @@ class PrimaryContentFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(activity!!).get(MainViewModel::class.java)
         button_bottom_sheet_1.setOnClickListener {
-            viewModel.showBottomSheet()
+            viewModel.showBottomSheet(BottomMenuState.Visible.BottomSheet1)
+        }
+        button_bottom_sheet_2.setOnClickListener {
+            viewModel.showBottomSheet(BottomMenuState.Visible.BottomSheet2)
+        }
+        button_bottom_sheet_3.setOnClickListener {
+            viewModel.showBottomSheet(BottomMenuState.Visible.BottomSheet3)
         }
     }
 }

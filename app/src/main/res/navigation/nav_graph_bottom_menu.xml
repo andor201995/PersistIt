@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_bottom_menu"
-    app:startDestination="@id/bottomMenuFragment">
+    app:startDestination="@id/bottomMenuFragment1">
 
 
     <fragment
-        android:id="@+id/bottomMenuFragment"
+        android:id="@+id/bottomMenuFragment1"
         android:name="com.andor.bottomsheetlockit.bottomMenu.BottomMenuFragment"
         android:label="fragment_bottom_menu"
         tools:layout="@layout/fragment_bottom_menu" >

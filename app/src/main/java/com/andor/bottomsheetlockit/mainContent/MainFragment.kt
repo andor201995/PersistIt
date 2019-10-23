@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import com.andor.bottomsheetlockit.MainActivity
 import com.andor.bottomsheetlockit.R
+import com.andor.bottomsheetlockit.core.BottomMenuState
 import com.andor.bottomsheetlockit.core.EventType
 import com.andor.bottomsheetlockit.core.MainViewModel
 import com.andor.bottomsheetlockit.core.TextFocusType
@@ -35,7 +36,7 @@ class MainFragment : Fragment(), TextEventListener {
         viewModel = ViewModelProvider(activity!!).get(MainViewModel::class.java)
 
         button_open_bottom_sheet.setOnClickListener {
-            viewModel.showBottomSheet()
+            viewModel.showBottomSheet(BottomMenuState.Visible.BottomSheet1)
         }
 
         button_open_pop_up.setOnClickListener {

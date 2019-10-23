@@ -38,6 +38,19 @@ class MainActivity : AppCompatActivity() {
         if (appState.bottomMenuState is BottomMenuState.Visible) {
             hideSoftKeyboard()
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+            val navControllerBottomSheet =
+                Navigation.findNavController(findViewById(R.id.bottomSheetNavHostFragment))
+            when (appState.bottomMenuState) {
+                is BottomMenuState.Visible.BottomSheet1 -> {
+                    navControllerBottomSheet.navigate(R.id.bottomMenuFragment1)
+                }
+                is BottomMenuState.Visible.BottomSheet2 -> {
+                    navControllerBottomSheet.navigate(R.id.bottomMenuFragment1)
+                }
+                is BottomMenuState.Visible.BottomSheet3 -> {
+                    navControllerBottomSheet.navigate(R.id.bottomMenuFragment1)
+                }
+            }
         } else {
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         }
@@ -53,7 +66,12 @@ class MainActivity : AppCompatActivity() {
 
             override fun onStateChanged(p0: View, p1: Int) {
                 when (bottomSheetBehavior.state) {
-                    BottomSheetBehavior.STATE_DRAGGING -> viewModel.showBottomSheet()
+                    BottomSheetBehavior.STATE_DRAGGING -> {
+                        val bottomMenuState = viewModel.getAppStateStream().value!!.bottomMenuState
+                        if (bottomMenuState is BottomMenuState.Visible) {
+                            viewModel.showBottomSheet(bottomMenuState)
+                        }
+                    }
 
                 }
             }
@@ -74,7 +92,11 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         val navControllerBottomSheet =
             Navigation.findNavController(findViewById(R.id.bottomSheetNavHostFragment))
-        if (navControllerBottomSheet.currentDestination!!.id == R.id.bottomMenuFragment && bottomSheetBehavior.state != BottomSheetBehavior.STATE_HIDDEN) {
+        if (navControllerBottomSheet.currentDestination!!.id != R.id.bottomMenuFragment1 && bottomSheetBehavior.state != BottomSheetBehavior.STATE_HIDDEN) {
+            navControllerBottomSheet.navigateUp()
+            return
+        }
+        if (navControllerBottomSheet.currentDestination!!.id == R.id.bottomMenuFragment1 && bottomSheetBehavior.state != BottomSheetBehavior.STATE_HIDDEN) {
             viewModel.hideBottomSheet()
             return
         }
