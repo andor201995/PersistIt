@@ -8,18 +8,72 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
+                  <entry key="baseBottomSheetFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-391" />
+                            <option name="y" value="256" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="bottomMenuFragment1">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="144" />
-                            <option name="y" value="220" />
+                            <option name="x" value="-33" />
+                            <option name="y" value="-64" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_bottomMenuFragment_to_primaryMenuFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="bottomMenuFragment2">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-29" />
+                            <option name="y" value="253" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_bottomMenuFragment2_to_primaryMenuFragment">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="bottomMenuFragment3">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-28" />
+                            <option name="y" value="600" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_bottomMenuFragment3_to_primaryMenuFragment">
                               <value>
                                 <LayoutPositions />
                               </value>

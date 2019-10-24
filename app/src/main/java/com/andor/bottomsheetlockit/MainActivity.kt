@@ -17,6 +17,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 class MainActivity : AppCompatActivity() {
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
     private lateinit var viewModel: MainViewModel
+    private var oldAppState = AppState()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,22 +41,26 @@ class MainActivity : AppCompatActivity() {
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             val navControllerBottomSheet =
                 Navigation.findNavController(findViewById(R.id.bottomSheetNavHostFragment))
-            when (appState.bottomMenuState) {
-                is BottomMenuState.Visible.BottomSheet1 -> {
-                    navControllerBottomSheet.navigate(R.id.bottomMenuFragment1)
-                }
-                is BottomMenuState.Visible.BottomSheet2 -> {
-                    navControllerBottomSheet.navigate(R.id.bottomMenuFragment1)
-                }
-                is BottomMenuState.Visible.BottomSheet3 -> {
-                    navControllerBottomSheet.navigate(R.id.bottomMenuFragment1)
+            if (appState.bottomMenuState != oldAppState.bottomMenuState) {
+                when (appState.bottomMenuState) {
+                    is BottomMenuState.Visible.BottomSheet1 -> {
+                        navControllerBottomSheet.navigate(R.id.bottomMenuFragment1)
+                    }
+                    is BottomMenuState.Visible.BottomSheet2 -> {
+                        navControllerBottomSheet.navigate(R.id.bottomMenuFragment2)
+                    }
+                    is BottomMenuState.Visible.BottomSheet3 -> {
+                        navControllerBottomSheet.navigate(R.id.bottomMenuFragment3)
+                    }
                 }
             }
         } else {
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         }
+        oldAppState = appState
 
     }
+
 
     override fun onStart() {
         super.onStart()
@@ -92,14 +97,18 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         val navControllerBottomSheet =
             Navigation.findNavController(findViewById(R.id.bottomSheetNavHostFragment))
-        if (navControllerBottomSheet.currentDestination!!.id != R.id.bottomMenuFragment1 && bottomSheetBehavior.state != BottomSheetBehavior.STATE_HIDDEN) {
-            navControllerBottomSheet.navigateUp()
+        if (viewModel.getAppStateStream().value!!.bottomMenuState is BottomMenuState.Visible) {
+            if (navControllerBottomSheet.currentDestination!!.id == R.id.bottomMenuFragment1 ||
+                navControllerBottomSheet.currentDestination!!.id == R.id.bottomMenuFragment2 ||
+                navControllerBottomSheet.currentDestination!!.id == R.id.bottomMenuFragment3
+            ) {
+                viewModel.hideBottomSheet()
+            } else {
+                navControllerBottomSheet.navigateUp()
+            }
             return
         }
-        if (navControllerBottomSheet.currentDestination!!.id == R.id.bottomMenuFragment1 && bottomSheetBehavior.state != BottomSheetBehavior.STATE_HIDDEN) {
-            viewModel.hideBottomSheet()
-            return
-        }
+
         super.onBackPressed()
     }
 }
