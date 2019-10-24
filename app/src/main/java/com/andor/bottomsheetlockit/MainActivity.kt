@@ -1,24 +1,23 @@
 package com.andor.bottomsheetlockit
 
 import android.app.Activity
-import android.os.Build
 import android.os.Bundle
-import android.view.ActionMode
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import com.andor.bottomsheetlockit.core.AppState
+import com.andor.bottomsheetlockit.core.BottomMenuState
+import com.andor.bottomsheetlockit.core.MainViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity(), TextEventListener {
+class MainActivity : AppCompatActivity() {
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
     private lateinit var viewModel: MainViewModel
+    private var oldAppState = AppState()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,11 +39,28 @@ class MainActivity : AppCompatActivity(), TextEventListener {
         if (appState.bottomMenuState is BottomMenuState.Visible) {
             hideSoftKeyboard()
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+            val navControllerBottomSheet =
+                Navigation.findNavController(findViewById(R.id.bottomSheetNavHostFragment))
+            if (appState.bottomMenuState != oldAppState.bottomMenuState) {
+                when (appState.bottomMenuState) {
+                    is BottomMenuState.Visible.BottomSheet1 -> {
+                        navControllerBottomSheet.navigate(R.id.bottomMenuFragment1)
+                    }
+                    is BottomMenuState.Visible.BottomSheet2 -> {
+                        navControllerBottomSheet.navigate(R.id.bottomMenuFragment2)
+                    }
+                    is BottomMenuState.Visible.BottomSheet3 -> {
+                        navControllerBottomSheet.navigate(R.id.bottomMenuFragment3)
+                    }
+                }
+            }
         } else {
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         }
+        oldAppState = appState
 
     }
+
 
     override fun onStart() {
         super.onStart()
@@ -55,76 +71,19 @@ class MainActivity : AppCompatActivity(), TextEventListener {
 
             override fun onStateChanged(p0: View, p1: Int) {
                 when (bottomSheetBehavior.state) {
-                    BottomSheetBehavior.STATE_DRAGGING -> viewModel.showBottomSheet()
+                    BottomSheetBehavior.STATE_DRAGGING -> {
+                        val bottomMenuState = viewModel.getAppStateStream().value!!.bottomMenuState
+                        if (bottomMenuState is BottomMenuState.Visible) {
+                            viewModel.showBottomSheet(bottomMenuState)
+                        }
+                    }
 
                 }
             }
         })
-
-        button_open_bottom_sheet.setOnClickListener {
-            viewModel.showBottomSheet()
-        }
-
-        button_open_pop_up.setOnClickListener {
-            val actionModeCallback = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                object : ActionMode.Callback2() {
-                    override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
-                        mode!!.finish()
-                        return true
-                    }
-
-                    override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
-                        mode?.menuInflater?.inflate(R.menu.pop_up_menu, menu)
-                        return true
-                    }
-
-                    override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean {
-                        return true
-                    }
-
-                    override fun onDestroyActionMode(mode: ActionMode?) {
-                    }
-                }
-            } else {
-                object : ActionMode.Callback {
-                    override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
-                        mode!!.finish()
-                        return true
-                    }
-
-                    override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {
-                        mode?.menuInflater?.inflate(R.menu.pop_up_menu, menu)
-                        return true
-                    }
-
-                    override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean {
-                        return true
-                    }
-
-                    override fun onDestroyActionMode(mode: ActionMode?) {
-                    }
-                }
-            }
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                it.startActionMode(actionModeCallback, ActionMode.TYPE_FLOATING)
-            }
-        }
-        editText.setEventListener(this)
-        editText.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) {
-                viewModel.onTextFocusChanged(TextFocusType.Focused)
-            } else {
-                viewModel.onTextFocusChanged(TextFocusType.None)
-            }
-        }
-        container.setOnFocusChangeListener { view, hasFocus ->
-            if (hasFocus) {
-                hideSoftKeyboard()
-            }
-        }
     }
 
-    private fun hideSoftKeyboard() {
+    fun hideSoftKeyboard() {
         val imm = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         //Find the currently focused view, so we can grab the correct window token from it.
         var view = currentFocus
@@ -135,21 +94,21 @@ class MainActivity : AppCompatActivity(), TextEventListener {
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
-    override fun onDown() {
-        viewModel.handleEvent(EventType.Text.Down)
-    }
-
-    override fun onSelectionChanged() {
-        viewModel.handleEvent(EventType.Text.SelectionChanged)
-    }
-
     override fun onBackPressed() {
-        val navController =
+        val navControllerBottomSheet =
             Navigation.findNavController(findViewById(R.id.bottomSheetNavHostFragment))
-        if (navController.currentDestination!!.id == R.id.bottomMenuFragment && bottomSheetBehavior.state != BottomSheetBehavior.STATE_HIDDEN) {
-            viewModel.hideBottomSheet()
+        if (viewModel.getAppStateStream().value!!.bottomMenuState is BottomMenuState.Visible) {
+            if (navControllerBottomSheet.currentDestination!!.id == R.id.bottomMenuFragment1 ||
+                navControllerBottomSheet.currentDestination!!.id == R.id.bottomMenuFragment2 ||
+                navControllerBottomSheet.currentDestination!!.id == R.id.bottomMenuFragment3
+            ) {
+                viewModel.hideBottomSheet()
+            } else {
+                navControllerBottomSheet.navigateUp()
+            }
             return
         }
+
         super.onBackPressed()
     }
 }

@@ -4,5 +4,8 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="bg_frag1">#A1AA66BB</color>
-    <color name="bg_frag2">#90BBAA00</color>
+    <color name="bg_frag2">#9043EE7B</color>
+    <color name="bg_frag3">#90CFF17E</color>
+    <color name="bg_frag4">#90EE823B</color>
+
 </resources>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_main_content"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.andor.bottomsheetlockit.mainContent.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_primaryContentFragment"
+            app:destination="@id/primaryContentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/primaryContentFragment"
+        android:name="com.andor.bottomsheetlockit.mainContent.PrimaryContentFragment"
+        android:label="fragment_primary_content"
+        tools:layout="@layout/fragment_primary_content" />
+</navigation>

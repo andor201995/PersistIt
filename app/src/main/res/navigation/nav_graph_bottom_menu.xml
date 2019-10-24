@@ -3,21 +3,39 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_bottom_menu"
-    app:startDestination="@id/bottomMenuFragment">
+    app:startDestination="@id/bottomMenuFragment1">
 
 
     <fragment
-        android:id="@+id/bottomMenuFragment"
-        android:name="com.andor.bottomsheetlockit.BottomMenuFragment"
+        android:id="@+id/bottomMenuFragment1"
+        android:name="com.andor.bottomsheetlockit.bottomMenu.BottomMenuFragment1"
         android:label="fragment_bottom_menu"
-        tools:layout="@layout/fragment_bottom_menu" >
+        tools:layout="@layout/fragment_bottom_menu1" >
         <action
             android:id="@+id/action_bottomMenuFragment_to_primaryMenuFragment"
             app:destination="@id/primaryMenuFragment" />
     </fragment>
     <fragment
         android:id="@+id/primaryMenuFragment"
-        android:name="com.andor.bottomsheetlockit.PrimaryMenuFragment"
+        android:name="com.andor.bottomsheetlockit.bottomMenu.PrimaryMenuFragment"
         android:label="fragment_primary_menu"
         tools:layout="@layout/fragment_primary_menu" />
+    <fragment
+        android:id="@+id/bottomMenuFragment2"
+        android:name="com.andor.bottomsheetlockit.bottomMenu.BottomMenuFragment2"
+        android:label="fragment_bottom_menu2"
+        tools:layout="@layout/fragment_bottom_menu2" >
+        <action
+            android:id="@+id/action_bottomMenuFragment2_to_primaryMenuFragment"
+            app:destination="@id/primaryMenuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bottomMenuFragment3"
+        android:name="com.andor.bottomsheetlockit.bottomMenu.BottomMenuFragment3"
+        android:label="fragment_bottom_menu3"
+        tools:layout="@layout/fragment_bottom_menu3" >
+        <action
+            android:id="@+id/action_bottomMenuFragment3_to_primaryMenuFragment"
+            app:destination="@id/primaryMenuFragment" />
+    </fragment>
 </navigation>

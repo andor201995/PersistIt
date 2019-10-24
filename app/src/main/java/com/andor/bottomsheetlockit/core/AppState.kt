@@ -1,4 +1,4 @@
-package com.andor.bottomsheetlockit
+package com.andor.bottomsheetlockit.core
 
 data class AppState(
     val focusType: TextFocusType = TextFocusType.None,
@@ -7,7 +7,11 @@ data class AppState(
 
 sealed class BottomMenuState {
     object Invisible : BottomMenuState()
-    object Visible : BottomMenuState()
+    sealed class Visible : BottomMenuState() {
+        object BottomSheet1 : Visible()
+        object BottomSheet2 : Visible()
+        object BottomSheet3 : Visible()
+    }
 }
 
 sealed class TextFocusType {

@@ -4,17 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_frag1"
-    tools:context=".BottomMenuFragment">
+    android:background="@color/bg_frag2"
+    tools:context=".bottomMenu.BottomMenuFragment2">
 
     <Button
+        android:id="@+id/next_button_bottom_menu2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/next_button"
         android:text="@string/next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
